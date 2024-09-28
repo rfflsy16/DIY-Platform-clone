@@ -1,0 +1,21 @@
+{
+  "name": "fsjs-p1-v3-c4-rfflsy16",
+  "version": "1.0.0",
+  "description": "Competencies and Tools : - OOP - MVC Callback - Schema - SQL - Node Postgres - Express - EJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "pg": "^8.13.0",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
