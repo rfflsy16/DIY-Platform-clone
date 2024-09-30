@@ -78,12 +78,18 @@ class Model {
             throw error
         }
     }
-    static async uploadPostsAdd() {
+    static async uploadPostsAdd(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId) {
         try {
             const data = `
             INSERT INTO "Posts" ("title", "difficulty", "estimatedTime", "description", "totalVote", "imageUrl", "createdDate", "AuthorId")
-            VALUES (')
+            VALUES ($1, $2, $3, $4, 0, $5, $6, $7)
             `
+
+            const values = [title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId]
+            await pool.query(data, values)
+
+            return `Berhasil add post`
+
         } catch (error) {
             throw error
         }
@@ -113,13 +119,25 @@ class Model {
     }
     static async getPostsIdEdit() {
         try {
+            
         } catch (error) {
             throw error
         }
     }
-    static async changePostIdEdit() {
+    static async changePostIdEdit(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId, postId) {
         try {
+            const data = `
+            UPDATE "Posts"
+            SET "title" = $1, "difficulty" = $2, "estimatedTime" = $3, "description" = $4, "imageUrl" = $5, "createdDate" = $6, "AuthorId" = $7
+            WHERE "id" = $8
+            `
+
+            const values = [title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId, postId]
+
+            await pool.query(data, values)
             
+            return 'Berhasil mengedit post'
+
         } catch (error) {
             throw error
         }
@@ -137,9 +155,16 @@ class Model {
             throw error
         }
     }
-    static async getPostsVote() {
+    static async getPostsVote(id) {
         try {
-            
+            const data = `
+            UPDATE "Posts"
+            SET "totalVote" = "totalVote" + 1
+            WHERE "id" = ${id}
+            `
+
+            await pool.query(data)
+            return 'Berhasil voting'
         } catch (error) {
             throw error
         }
@@ -151,9 +176,11 @@ async function test() {
         // console.log(await Model.getAuthors())
         // console.log(await Model.getAuthorsDetail())
         // console.log(await Model.getPosts())
-        // console.log(await Model.getPostsId(8))
-        // console.log(await Model.getPostsIdDelete(8))
-        
+        // console.log(await Model.getPostsId(9))
+        // console.log(await Model.getPostsIdDelete(7))
+        // console.log(await Model.uploadPostsAdd('test', 'hard', 120, 'wkwkwkwkww', 'tesetsetsetest', '2024-11-12', 1))
+        // console.log(await Model.changePostIdEdit('wkwkwkw', 'easy', 120, 'wkwkwkwkww', 'tesetsetsetest', '2024-11-12', 1, 9))
+        // console.log(await Model.getPostsVote(9))
     } catch (error) {
         console.log(error)
     }
