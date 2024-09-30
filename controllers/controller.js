@@ -1,9 +1,12 @@
-const {response} = require('express')
 const Model = require('../models/model.js')
 
 class Controller {
-    static showLandingPage(request, response) {
-        response.render('home')
+    static showLandingPage(req, res) {
+        try {
+            res.send('ini landing page')
+        } catch (error) {
+            res.send(error)
+        }
     }
     static async getAuthors(req, res) {
         try {
@@ -14,7 +17,7 @@ class Controller {
     }
     static async getAuthorsDetail(req, res) {
         try {
-            
+
         } catch (error) {
             
         }
@@ -49,7 +52,6 @@ class Controller {
     }
     static async getPostsIdEdit(req, res) {
         try {
-            
         } catch (error) {
             
         }
@@ -63,7 +65,7 @@ class Controller {
     }
     static async getPostsIdDelete(req, res) {
         try {
-            
+
         } catch (error) {
             
         }

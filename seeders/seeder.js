@@ -19,10 +19,10 @@ async function seedData() {
             return `('${el.title}', '${el.difficulty}', '${el.estimatedTime}', '${el.description}', '${el.totalVote}', '${el.imageUrl}', '${el.createdDate}', '${el.AuthorId}')`
         }).join(', \n')
         // console.log(data)
-        console.log(data)
+        // console.log(data)
         let seedPosts = `INSERT INTO "Posts" ("title", "difficulty", "estimatedTime", "description", "totalVote", "imageUrl", "createdDate", "AuthorId") VALUES ${data}`
         // console.log(seedPosts)
-
+        
         await pool.query(seedAuthors)
         console.log("SUKSES SEEDAUTHOR")
         await pool.query(seedPosts)

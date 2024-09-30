@@ -52,7 +52,6 @@ class Factory{
     static getPostDetail(id, title, difficulty, totalVote, estimatedTime, description, imageUrl, createdDate, AuthorId, authorName) {
         return new PostDetail(id, title, difficulty, totalVote, estimatedTime, description, imageUrl, createdDate, AuthorId, authorName)
     }
-
 }
 
 module.exports = Factory;
