@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Platform - Edit Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">DIY Platform</h1>
+        <h2 class="text-center mb-4">Edit Post #<%= posts.id %></h2>
+
+        <form action="/posts/<%= posts.id %>/edit" method="post" class="border p-4 bg-white shadow-sm rounded">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" value="<%= posts.title %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="AuthorId" class="form-label">Author:</label>
+                <select name="AuthorId" id="AuthorId" class="form-select" required>
+                    <option value="" disabled>Select author</option>
+                    <% authors.forEach(el => { %>
+                        <option value="<%= el.id %>" <%= el.id === posts.AuthorId ? 'selected' : '' %>><%= el.fullName %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="difficulty" class="form-label">Difficulty:</label>
+                <select name="difficulty" id="difficulty" class="form-select" required>
+                    <option value="" disabled>Select difficulty</option>
+                    <option value="Easy" <%= posts.difficulty === 'Easy' ? 'selected' : '' %>>Easy</option>
+                    <option value="Medium" <%= posts.difficulty === 'Medium' ? 'selected' : '' %>>Medium</option>
+                    <option value="Hard" <%= posts.difficulty === 'Hard' ? 'selected' : '' %>>Hard</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="estimatedTime" class="form-label">Estimated Time (Minutes):</label>
+                <input type="number" class="form-control" id="estimatedTime" name="estimatedTime" value="<%= posts.estimatedTime %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="imageUrl" class="form-label">Image URL:</label>
+                <input type="url" class="form-control" id="imageUrl" name="imageUrl" value="<%= posts.imageUrl %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="createdDate" class="form-label">Created Date:</label>
+                <input type="date" class="form-control" id="createdDate" name="createdDate" value="<%= posts.formatCreatedDate %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea id="description" name="description" class="form-control" rows="4" required><%= posts.description %></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Edit Post</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

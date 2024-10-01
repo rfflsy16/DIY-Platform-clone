@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Platform</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">DIY Platform</h1>
+
+
+        <div class="d-flex justify-content-start mb-4">
+            <a class="btn btn-outline-secondary" href="/authors">Back to author</a>
+        </div>
+
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Author</th>
+                    <th>Total Post</th>
+                    <th>Total Vote</th>
+                    <th>Average Estimated Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% authorsDetail.forEach(el => { %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.fullName %></td>
+
+                    <% if (el.totalPost > 0) { %>
+                        <td><%= el.totalPost %></td>
+                    <% } else { %>
+                        <td class="text-danger"><%= el.totalPost %></td>
+                    <% } %>
+
+                    <% if (el.totalVote > 0) { %>
+                        <td><%= el.totalVote %></td>
+                    <% } else { %>
+                        <td class="text-danger"><%= el.totalVote %></td>
+                    <% } %>
+
+                    <% if (el.averageTime > 0) { %>
+                        <td><%= el.averageTime %></td>
+                    <% } else { %>
+                        <td class="text-danger">0</td>
+                    <% } %>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

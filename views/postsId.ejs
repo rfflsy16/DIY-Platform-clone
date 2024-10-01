@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Platform - <%= posts.title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center text-primary mb-4">DIY Platform</h1>
+        <h2 class="text-center mb-4"><%= posts.title %></h2>
+
+        <div class="text-center">
+            <img src="<%= posts.imageUrl %>" alt="<%= posts.title %>" class="img-fluid mb-4" style="max-width: 200px; height: auto;">
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Estimated Time:</strong> <%= posts.estimatedTime %> Minutes</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Difficulty:</strong> <%= posts.difficulty %></p>
+            </div>
+        </div>
+
+        <p><strong>Author:</strong> <%= posts.authorName %></p>
+        <p><strong>Created Date:</strong> <%= posts.formatCreatedDate %></p>
+        <p><strong>Total Votes:</strong> <%= posts.totalVote %></p>
+
+        <div class="text-center mb-4">
+            <button class="btn btn-success" onclick="location.href='/posts/<%= posts.id %>/vote'">Vote</button>
+        </div>
+
+        <div class="border p-4 bg-white shadow-sm rounded">
+            <p style="white-space: pre-line;"><%= posts.description %></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

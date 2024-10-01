@@ -14,7 +14,6 @@ class Model {
             const data = `
             SELECT * FROM "Authors"
             `
-
             let result = await pool.query(data)
             // console.log(result.rows)
             result = result.rows.map(el => {
@@ -186,5 +185,5 @@ async function test() {
     }
 }
 
-test()
+// test()
 module.exports = Model
