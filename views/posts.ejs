@@ -5,43 +5,196 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIY Platform</title>
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
 
-    <div class="container mt-5">
-        <h1 class="text-center text-primary mb-4">DIY Platform</h1>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #00bcd4, #80deea);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.4s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
+        }
+
+        .btn:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Tabel styling */
+        .table {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: slide-in 0.5s ease forwards;
+        }
+
+        @keyframes slide-in {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(255, 105, 180, 0.5);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .table-dark th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        /* Card styling */
+        .card-custom {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            animation: fade-in 0.5s ease forwards;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5 position-relative">
+        <h1 class="text-center">DIY Platform</h1>
 
         <div class="d-flex justify-content-start mb-4">
             <a class="btn btn-success" href="/posts/add">Add Post</a>
         </div>
 
-        <table class="table table-bordered table-striped table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>Title</th>
-                    <th>Difficulty</th>
-                    <th>Total Vote</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% posts.forEach(el => { %>
-                <tr>
-                    <td><%= el.title %></td>
-                    <td><%= el.difficulty %></td>
-                    <td><%= el.totalVote %></td>
-                    <td>
-                        <a href="/posts/<%= el.id %>" class="btn btn-info btn-sm">Read More</a>
-                        <a href="/posts/<%= el.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="/posts/<%= el.id %>/delete" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
-                <% }) %>
-            </tbody>
-        </table>
+        <div class="card-custom" data-aos="fade-up">
+            <h2 class="text-center">Latest Posts</h2>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Difficulty</th>
+                        <th>Total Vote</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(el => { %>
+                    <tr>
+                        <td><%= el.title %></td>
+                        <td><%= el.difficulty %></td>
+                        <td><%= el.totalVote %></td>
+                        <td class="action-buttons">
+                            <a href="/posts/<%= el.id %>" class="btn btn-info btn-sm">Read More</a>
+                            <a href="/posts/<%= el.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="/posts/<%= el.id %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+    </script>
 </body>
 </html>

@@ -29,7 +29,7 @@ class Controller {
     static async getPosts(req, res) {
         try {
             const posts = await Model.getPosts()
-            res.render('posts', { posts })
+            res.send(posts)
         } catch (error) {
             res.send(error)
         }
@@ -37,7 +37,7 @@ class Controller {
     static async getPostsAdd(req, res) {
         try {
             const authors = await Model.getAuthors()
-            res.render('addPosts', { authors })
+            res.send(authors)
         } catch (error) {
             res.send(error)
         }
@@ -45,8 +45,8 @@ class Controller {
     static async uploadPostsAdd(req, res) {
         try {
             const { title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId } = req.body
-            await Model.uploadPostsAdd(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId )
-            res.redirect('/posts')
+            await Model.uploadPostsAdd(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId)
+            res.send('Berhasil add post')
         } catch (error) {
             res.send(error)
         }
@@ -54,7 +54,7 @@ class Controller {
     static async getPostsId(req, res) {
         try {
             const posts = await Model.getPostsId(req.params.id)
-            res.render('postsId', { posts })
+            res.send(posts)
         } catch (error) {
             res.send(error)
         }
@@ -63,7 +63,7 @@ class Controller {
         try {
             const authors = await Model.getAuthors()
             const posts = await Model.getPostsId(req.params.id)
-            res.render('editPost', { authors, posts})
+            res.send(posts)
         } catch (error) {
             console.log(error)
             res.send(error)
@@ -71,9 +71,10 @@ class Controller {
     }
     static async changePostIdEdit(req, res) {
         try {
-            const  { title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId } = req.body
-            await Model.changePostIdEdit(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId, req.params.id)
-            res.redirect('/posts')
+            const { id } = req.params
+            const { title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId } = req.body
+            await Model.changePostIdEdit(title, difficulty, estimatedTime, description, imageUrl, createdDate, AuthorId, id)
+            res.send('Berhasil edit post')
         } catch (error) {
             console.log(error)
             res.send(error)
@@ -82,7 +83,7 @@ class Controller {
     static async getPostsIdDelete(req, res) {
         try {
             await Model.getPostsIdDelete(req.params.id)
-            res.redirect('/posts')
+            res.send('Berhasil delete')
         } catch (error) {
             res.send(error)
         }
@@ -90,7 +91,7 @@ class Controller {
     static async getPostsVote(req, res) {
         try {
             await Model.getPostsVote(req.params.id)
-            res.redirect(`/posts/${req.params.id}`)
+            res.send(`Berhasil menambahkan vote`)
         } catch (error) {
             res.send(error)
         }

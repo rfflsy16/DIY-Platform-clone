@@ -2,13 +2,6 @@ const Factory = require('./class.js')
 const pool = require('../config/connnection.js')
 
 class Model {
-    static showLandingPage() {
-        try {
-            
-        } catch (error) {
-            throw error
-        }
-    }
     static async getAuthors() {
         try {
             const data = `
